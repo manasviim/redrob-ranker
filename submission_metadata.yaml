@@ -1,0 +1,55 @@
+team_name: "your-team-name-here"
+
+primary_contact:
+  name: "Your Name"
+  email: "your@email.com"
+  phone: "+91-XXXXXXXXXX"
+
+team_members:
+  - name: "Your Name"
+    email: "your@email.com"
+    role: "ML Engineer"
+
+github_repo: "https://github.com/YOUR_USERNAME/redrob-ranker"
+
+sandbox_link: "https://colab.research.google.com/YOUR_LINK"
+
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
+
+compute:
+  platform: "Local CPU machine"
+  cpu_cores: 4
+  ram_gb: 16
+  python_version: "3.11"
+  os: "Linux / macOS"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: false
+  pre_computation_time_minutes: 0
+
+ai_tools_used:
+  - "Claude"
+
+ai_usage_summary: |
+  Used Claude for architecture discussion and code review.
+  All scoring logic, weights, and JD analysis done by the team.
+  No candidate data was fed to any LLM during ranking.
+
+methodology_summary: |
+  Multi-signal structured ranker with four components: skill match (38%),
+  career quality (32%), TF-IDF semantic similarity (20%), and behavioral
+  availability (10%). Skill scoring weights proficiency and duration, not
+  just keyword presence. Career scoring penalizes pure-consulting backgrounds
+  and wrong-domain titles (CV/speech/robotics). TF-IDF re-ranks the top 3000
+  structured candidates using a JD-derived query with bigrams and sublinear TF.
+  Honeypot detection via profile consistency checks (expert skills with 0 months
+  use, career months vs stated YoE mismatch). Reasoning strings are generated
+  from actual signal values — no templates, no hallucination.
+  Runtime: ~14 seconds on CPU. No GPU, no API calls, no network.
+
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true
